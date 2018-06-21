@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>Totally Trivial Trivia Game!</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script> 
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Unicase" rel="stylesheet">
+
+    <style>
+
+        body {
+          background-image: url(assets/images/background.jpg);
+          font-family: 'Cormorant Unicase', serif;
+          font-weight: strong;
+        }
+
+        .game {
+          background-image: url(assets/images/background2.jpg);
+          height: 1000px;
+        }
+
+        .row {
+          height: 100px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0 auto;
+            color: gold;
+        }
+
+        h2 {
+            color: gold;
+            margin: 0 auto;
+        }
+
+        h3 {
+            font-size: 2em;
+            color: gold;
+            margin: 0 auto;
+        }
+
+        h4 {
+            font-size: 1em;
+            height: 25px;
+            font-weight: strong;
+            color: gold;
+            margin: 0 auto;
+        }
+
+    </style>
+
+  </head>
+  <body>
+
+         <div class="container game">
+            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="text-align:center">
+                <h1> Totally Trivial Trivia! </h1>         
+            </div>
+            <br>
+            <br>
+            <div class="row col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2" style="text-align:center" >
+                <h2> Time Remaining: <span class="timerR">10</span></h2>
+            </div>
+            <br>
+            <br>
+            <div class="row col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2" style="text-align:center">
+                <h3 class="question"></h3>
+            </div>
+               
+            <br>
+            <br>
+
+            <div class="row col-lg-4 offset-lg-5 col-md-4 offset-md-5 col-sm-4 offset-sm-5 col-xs-4 offset-xs-5">
+                <button class="answer1 btn" style="height: 35px"></button>
+            </div>
+            <div class="row col-lg-4 offset-lg-5 col-md-4 offset-md-5 col-sm-4 offset-sm-5 col-xs-4 offset-xs-5">
+                <button class="answer2 btn" style="height: 35px"></button>
+            </div>
+            <div class="row col-lg-4 offset-lg-5 col-md-4 offset-md-5 col-sm-4 offset-sm-5 col-xs-4 offset-xs-5">
+                <button class="answer3 btn" style="height: 35px"></button>
+            </div>
+            <div class="row col-lg-4 offset-lg-5 col-md-4 offset-md-5 col-sm-4 offset-sm-5 col-xs-4 offset-xs-5">
+                <button class="answer4 btn" style="height: 35px"></button>
+            </div>
+        </div>
+  </body>
+</html>
