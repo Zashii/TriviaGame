@@ -108,7 +108,7 @@
                 }, 2000);
             }
 
-            //When the end of the game is reached
+            //End Game Result Screen and Restart Button shown to restart the game
              var gameOver = function(){
                 $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
                 $(".restart").on("click", function(){
