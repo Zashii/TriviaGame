@@ -94,6 +94,62 @@
                 return indexNum;
             }
 
+            //Moves the screen onto the next question
+            var nextQuestion = function(){
+                setTimeout(function(){
+                    timer= 11;
+                    clockRunning = false;
+                    if (!clockRunning) {
+                        countdown = setInterval(dropTime, 1000);
+                        clockRunning = true;
+                    }
+                    invalidIndex = [];
+                    questionSetup(); 
+                }, 2000);
+            }
+
+            //When the end of the game is reached
+             var gameOver = function(){
+                $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
+                $(".restart").on("click", function(){
+            
+                    questionNum = -1;
+                    invalidIndex = [];
+                    correctNum = 0;
+                    wrongNum = 0;
+                    countdown = setInterval(dropTime, 1000);
+                    timer = 11;
+                    clockRunning = true;
+            
+                    questionSetup();
+                })
+                $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+            }
+
+            //Function that shows the answer to the question (during the result screen)
+            var showResult = function(){
+                $(".answer1").off("click");
+                $(".answer2").off("click");
+                $(".answer3").off("click");
+                $(".answer4").off("click");
+                $(".answer1").hide();
+                $(".answer2").hide();
+                $(".answer3").hide();
+                $(".answer4").hide();
+                $(".answer1").removeClass("wrongAnswer");
+                $(".answer1").removeClass("correctAnswer");
+                $(".answer2").removeClass("wrongAnswer");
+                $(".answer2").removeClass("correctAnswer");
+                $(".answer3").removeClass("wrongAnswer");
+                $(".answer3").removeClass("correctAnswer");
+                $(".answer4").removeClass("wrongAnswer");
+                $(".answer4").removeClass("correctAnswer");
+                $(".question").append("<div class=\"row\"></div>");
+                $(".question").append("<div class=\"row newRow\"></div>");
+                $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
+                clearInterval(countdown);
+            }
+
 
             //The function that runs when the user runs out of time on the clock
             var dropTime = function(){
@@ -103,58 +159,14 @@
 
                     wrongNum ++;
 
-                    //All the onclick event handlers are removed, and the buttons are hidden temporarily
-                    $(".answer1").off("click");
-                    $(".answer2").off("click");
-                    $(".answer3").off("click");
-                    $(".answer4").off("click");
-                    $(".answer1").hide();
-                    $(".answer2").hide();
-                    $(".answer3").hide();
-                    $(".answer4").hide();
+                    //All the onclick event handlers are removed, and the buttons are hidden temporarily. The result of the guess is shown.
                     $(".question").html("Time ran out! You lose! The answer was " + quiz.questions[questionNum].answer[0].name + ".");
-                    $(".answer1").removeClass("wrongAnswer");
-                    $(".answer1").removeClass("correctAnswer");
-                    $(".answer2").removeClass("wrongAnswer");
-                    $(".answer2").removeClass("correctAnswer");
-                    $(".answer3").removeClass("wrongAnswer");
-                    $(".answer3").removeClass("correctAnswer");
-                    $(".answer4").removeClass("wrongAnswer");
-                    $(".answer4").removeClass("correctAnswer");
-                    $(".question").append("<div class=\"row\"></div>");
-                    $(".question").append("<div class=\"row newRow\"></div>");
-                    $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
-
-                    clearInterval(countdown);
+                    showResult();
 
                     if (questionNum<quiz.questions.length-1){
-                        setTimeout(function(){
-                            timer= 11;
-                            clockRunning = false;
-                            if (!clockRunning) {
-                                countdown = setInterval(dropTime, 1000);
-                                clockRunning = true;
-                            }
-                            invalidIndex = [];
-                            questionSetup(); 
-                        }, 2000);
+                        nextQuestion();
                     } else {
-
-                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
-                        $(".restart").on("click", function(){
-
-                            questionNum = -1;
-                            invalidIndex = [];
-                            correctNum = 0;
-                            wrongNum = 0;
-                            countdown = setInterval(dropTime, 1000);
-                            timer = 11;
-                            clockRunning = true;
-
-                            questionSetup();
-                        })
-
-                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                        gameOver();
                     }
               }
             }
@@ -221,58 +233,15 @@
                     
                     wrongNum ++;
 
-                    //All the onclick event handlers are removed, and the buttons are hidden temporarily
-                    $(".answer1").off("click");
-                    $(".answer2").off("click");
-                    $(".answer3").off("click");
-                    $(".answer4").off("click");
-                    $(".answer1").hide();
-                    $(".answer2").hide();
-                    $(".answer3").hide();
-                    $(".answer4").hide();
-                    $(".question").html("Your answer was wrong! The answer was " + quiz.questions[questionNum].answer[0].name + ".");
-                    $(".answer1").removeClass("wrongAnswer");
-                    $(".answer1").removeClass("correctAnswer");
-                    $(".answer2").removeClass("wrongAnswer");
-                    $(".answer2").removeClass("correctAnswer");
-                    $(".answer3").removeClass("wrongAnswer");
-                    $(".answer3").removeClass("correctAnswer");
-                    $(".answer4").removeClass("wrongAnswer");
-                    $(".answer4").removeClass("correctAnswer");
-                    $(".question").append("<div class=\"row\"></div>");
-                    $(".question").append("<div class=\"row newRow\"></div>");
-                    $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
+                    //All the onclick event handlers are removed, and the buttons are hidden temporarily. The result of the guess is shown.
 
-                    clearInterval(countdown);
+                    $(".question").html("Your answer was wrong! The answer was " + quiz.questions[questionNum].answer[0].name + ".");
+                    showResult();
 
                     if (questionNum<quiz.questions.length-1){
-                        setTimeout(function(){
-                            timer= 11;
-                            clockRunning = false;
-                            if (!clockRunning) {
-                                countdown = setInterval(dropTime, 1000);
-                                clockRunning = true;
-                            }
-                            invalidIndex = [];
-                            questionSetup(); 
-                        }, 2000);
+                        nextQuestion();
                     } else {
-
-                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
-                        $(".restart").on("click", function(){
-
-                            questionNum = -1;
-                            invalidIndex = [];
-                            correctNum = 0;
-                            wrongNum = 0;
-                            countdown = setInterval(dropTime, 1000);
-                            timer = 11;
-                            clockRunning = true;
-
-                            questionSetup();
-                        })
-
-                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                        gameOver();
                     }
                 });
 
@@ -281,59 +250,16 @@
 
                     correctNum ++;
 
-                    //All the onclick event handlers are removed, and the buttons are hidden temporarily
-                    $(".answer1").off("click");
-                    $(".answer2").off("click");
-                    $(".answer3").off("click");
-                    $(".answer4").off("click");
-                    $(".answer1").hide();
-                    $(".answer2").hide();
-                    $(".answer3").hide();
-                    $(".answer4").hide();
+                    //All the onclick event handlers are removed, and the buttons are hidden temporarily. The result of the guess is shown.
+                   
                     $(".question").html("Your answer was correct! The answer is indeed " + quiz.questions[questionNum].answer[0].name + ".");
-                    $(".answer1").removeClass("wrongAnswer");
-                    $(".answer1").removeClass("correctAnswer");
-                    $(".answer2").removeClass("wrongAnswer");
-                    $(".answer2").removeClass("correctAnswer");
-                    $(".answer3").removeClass("wrongAnswer");
-                    $(".answer3").removeClass("correctAnswer");
-                    $(".answer4").removeClass("wrongAnswer");
-                    $(".answer4").removeClass("correctAnswer");
-                    $(".question").append("<div class=\"row\"></div>");
-                    $(".question").append("<div class=\"row newRow\"></div>");
-                    $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
-
-                    clearInterval(countdown);
+                    showResult();
 
                     if (questionNum<quiz.questions.length-1){
-                        setTimeout(function(){
-                            timer= 11;
-                            clockRunning = false;
-                            if (!clockRunning) {
-                                countdown = setInterval(dropTime, 1000);
-                                clockRunning = true;
-                            }
-                            invalidIndex = [];
-                            questionSetup(); 
-                        }, 2000);
+                        nextQuestion();
                     } else {
-                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
-                        $(".restart").on("click", function(){
-
-                            questionNum = -1;
-                            invalidIndex = [];
-                            correctNum = 0;
-                            wrongNum = 0;
-                            timer = 11;
-                            countdown = setInterval(dropTime, 1000);
-                            clockRunning = true;
-
-                            questionSetup();
-                        })
-                        
-                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                        gameOver();
                     }
-   
                 });
 
                 
