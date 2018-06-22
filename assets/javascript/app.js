@@ -127,7 +127,7 @@
 
                     clearInterval(countdown);
 
-                    if (questionNum<quiz.questions.length){
+                    if (questionNum<quiz.questions.length-1){
                         setTimeout(function(){
                             timer= 11;
                             clockRunning = false;
@@ -139,6 +139,8 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
+                        $(".timerR").remove();
+                        $(".theTimer").remove();
                         setTimeout(function(){
                             $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                         }, 2000);
@@ -231,8 +233,8 @@
                     $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
 
                     clearInterval(countdown);
-                    
-                    if (questionNum<quiz.questions.length){
+
+                    if (questionNum<quiz.questions.length-1){
                         setTimeout(function(){
                             timer= 11;
                             clockRunning = false;
@@ -244,6 +246,8 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
+                        $(".timerR").remove();
+                        $(".theTimer").remove();
                         $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                     }
                 });
@@ -277,7 +281,7 @@
 
                     clearInterval(countdown);
 
-                    if (questionNum<quiz.questions.length){
+                    if (questionNum<quiz.questions.length-1){
                         setTimeout(function(){
                             timer= 11;
                             clockRunning = false;
@@ -289,6 +293,8 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
+                        $(".timerR").remove();
+                        $(".theTimer").remove();
                         $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                     }
    
