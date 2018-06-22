@@ -139,11 +139,22 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
-                        $(".timerR").remove();
-                        $(".theTimer").remove();
-                        setTimeout(function(){
-                            $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
-                        }, 2000);
+
+                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
+                        $(".restart").on("click", function(){
+
+                            questionNum = -1;
+                            invalidIndex = [];
+                            correctNum = 0;
+                            wrongNum = 0;
+                            countdown = setInterval(dropTime, 1000);
+                            timer = 11;
+                            clockRunning = true;
+
+                            questionSetup();
+                        })
+
+                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                     }
               }
             }
@@ -246,8 +257,21 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
-                        $(".timerR").remove();
-                        $(".theTimer").remove();
+
+                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
+                        $(".restart").on("click", function(){
+
+                            questionNum = -1;
+                            invalidIndex = [];
+                            correctNum = 0;
+                            wrongNum = 0;
+                            countdown = setInterval(dropTime, 1000);
+                            timer = 11;
+                            clockRunning = true;
+
+                            questionSetup();
+                        })
+
                         $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                     }
                 });
@@ -293,8 +317,20 @@
                             questionSetup(); 
                         }, 2000);
                     } else {
-                        $(".timerR").remove();
-                        $(".theTimer").remove();
+                        $(".timerR").append("<button class=\"restart\">Click to restart the game</button>");
+                        $(".restart").on("click", function(){
+
+                            questionNum = -1;
+                            invalidIndex = [];
+                            correctNum = 0;
+                            wrongNum = 0;
+                            timer = 11;
+                            countdown = setInterval(dropTime, 1000);
+                            clockRunning = true;
+
+                            questionSetup();
+                        })
+                        
                         $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
                     }
    
