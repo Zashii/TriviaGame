@@ -73,8 +73,10 @@
             var countdown;
             var indexNum;
             var invalidIndex = [];
-            var questionNum;
+            var questionNum = -1;
             var clockRunning = false;
+            var correctNum = 0;
+            var wrongNum = 0;
 
             //This function makes sure that the order of the answers are randomized each time.
             //An answer is given a random position (indexNum), but it is checked against the invalidIndex array to ensure
@@ -98,6 +100,9 @@
               timer --;
               $(".timerR").html(timer);
               if (timer == 0){
+
+                    wrongNum ++;
+
                     //All the onclick event handlers are removed, and the buttons are hidden temporarily
                     $(".answer1").off("click");
                     $(".answer2").off("click");
@@ -122,15 +127,22 @@
 
                     clearInterval(countdown);
                     clockRunning = false;
-                    setTimeout(function(){
-                        timer= 11;
-                        if (!clockRunning) {
-                            countdown = setInterval(dropTime, 1000);
-                            clockRunning = true;
-                        }
-                        invalidIndex = [];
-                        questionSetup(); 
-                    }, 2000);
+
+                    if (questionNum!=quiz.questions.length-1){
+                        setTimeout(function(){
+                            timer= 11;
+                            if (!clockRunning) {
+                                countdown = setInterval(dropTime, 1000);
+                                clockRunning = true;
+                            }
+                            invalidIndex = [];
+                            questionSetup(); 
+                        }, 2000);
+                    } else {
+                        setTimeout(function(){
+                            $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                        }, 2000);
+                    }
               }
             }
 
@@ -151,7 +163,7 @@
                 $(".answer4").show();
                 $(".question").show();
 
-                questionNum = Math.floor(Math.random()*quiz.questions.length);
+                questionNum ++;
 
                 $(".question").html(quiz.questions[questionNum].problem);
 
@@ -194,6 +206,8 @@
 
                 $(".wrongAnswer").on("click", function(){
                     
+                    wrongNum ++;
+
                     //All the onclick event handlers are removed, and the buttons are hidden temporarily
                     $(".answer1").off("click");
                     $(".answer2").off("click");
@@ -218,19 +232,26 @@
 
                     clearInterval(countdown);
                     clockRunning = false;
-                    setTimeout(function(){
-                        timer= 11;
-                        if (!clockRunning) {
-                            countdown = setInterval(dropTime, 1000);
-                            clockRunning = true;
-                        }
-                        invalidIndex = [];
-                        questionSetup(); 
-                    }, 2000);
+                    
+                    if (questionNum!=quiz.questions.length-1){
+                        setTimeout(function(){
+                            timer= 11;
+                            if (!clockRunning) {
+                                countdown = setInterval(dropTime, 1000);
+                                clockRunning = true;
+                            }
+                            invalidIndex = [];
+                            questionSetup(); 
+                        }, 2000);
+                    } else {
+                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                    }
                 });
 
                 //Re-assigning the on-click event handlers to each button so that pressing the right button gives either Correct or Wrong as it should be 
                 $(".correctAnswer").on("click", function(){
+
+                    correctNum ++;
 
                     //All the onclick event handlers are removed, and the buttons are hidden temporarily
                     $(".answer1").off("click");
@@ -255,12 +276,20 @@
                     $(".newRow").append("<br> <img src=" + quiz.questions[questionNum].picture + " class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"/>");
 
                     clearInterval(countdown);
-                    setTimeout(function(){
-                        timer= 11;
-                        countdown = setInterval(dropTime, 1000);
-                        invalidIndex = [];
-                        questionSetup(); 
-                    }, 2000);
+
+                    if (questionNum!=quiz.questions.length-1){
+                        setTimeout(function(){
+                            timer= 11;
+                            if (!clockRunning) {
+                                countdown = setInterval(dropTime, 1000);
+                                clockRunning = true;
+                            }
+                            invalidIndex = [];
+                            questionSetup(); 
+                        }, 2000);
+                    } else {
+                        $(".newRow").append("<p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of correct answers is: " + correctNum + "</p><p class=\"col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2 image\" style=\"margin-bottom:80px\"> Number of wrong answers is: " + wrongNum + "</p>");
+                    }
    
                 });
 
